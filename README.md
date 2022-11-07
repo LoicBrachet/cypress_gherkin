@@ -45,42 +45,48 @@ Télécharger l'extension suivante:
     npm install -D @bahmutov/cypress-esbuild-preprocessor
 
 Configurer le fichier cypress.config.js comme ceci
-    import { defineConfig } from "cypress";
-    import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
-    import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
-    import createEsbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild";
-
-    export default defineConfig({
-    e2e: {
-        specPattern: "**/*.feature",
-        async setupNodeEvents(
-        on: Cypress.PluginEvents,
-        config: Cypress.PluginConfigOptions
-        ): Promise<Cypress.PluginConfigOptions> {
-        // This is required for the preprocessor to be able to generate JSON reports after each run, and more,
-        await addCucumberPreprocessorPlugin(on, config);
-
-        on(
-            "file:preprocessor",
-            createBundler({
-            plugins: [createEsbuildPlugin(config)],
-            })
-        );
-
-        // Make sure to return the config object as it might have been modified by the plugin.
-        return config;
-        },
-    },
-    });
-
-Télécharger les dépendances suivantes pour générer des rapports en json:
-    npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator
-
-Rajouter les lignes suivantes dans le config.js
-    reporter: 'mochawesome',
-    reporterOptions: {
-    reportDir: 'cypress/results',
-    overwrite: false,
-    html: false,
-    json: true
+   const { defineConfig } = require('cypress')
+const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
+const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild').createEsbuildPlugin;
+const addCucumberPreprocessorPlugin = require('@badeball/cypress-cucumber-preprocessor').addCucumberPreprocessorPlugin;
+ 
+async function setupNodeEvents(on, config) {
+  await addCucumberPreprocessorPlugin(on, config);
+     
+  on(
+    "file:preprocessor",
+         createBundler({
+         plugins: [createEsbuildPlugin(config)],
+        })
+     
+  );
+ 
+  // Make sure to return the config object as it might have been modified by the plugin.
+  return config;
+}
+ 
+module.exports = defineConfig({
+  e2e: {
+    specPattern: "**/*.feature",
+    excludeSpecPattern: [
+      "*.js",
+      "*.md"
+    ],
+    chromeWebSecurity: false,
+    supportFile: false,
+    setupNodeEvents
   }
+ 
+})
+
+Ajouter les lignes suivantes dans la rubrique dependencies du package.json
+     "cypress-cucumber-preprocessor": {
+    "json": {
+      "enabled": true,
+      "formatter": "cucumber-json-formatter",
+      "output": "cucumber-report.json"
+    }
+}
+
+lancer les tests en tapant la commande suivante:
+    npx cypress run --spec 'cypress/e2e/**/*.feature'

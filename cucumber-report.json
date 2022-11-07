@@ -1,0 +1,46 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "duckduckgo.com;visiting-the-frontpage",
+        "keyword": "Scenario",
+        "line": 2,
+        "name": "visiting the frontpage",
+        "steps": [
+          {
+            "keyword": "When ",
+            "line": 3,
+            "name": "I visit duckduckgo.com",
+            "result": {
+              "duration": 2368000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "not available:0"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "line": 4,
+            "name": "I should see a search bar",
+            "result": {
+              "duration": 94000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "not available:0"
+            }
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "duckduckgo.com",
+    "keyword": "Feature",
+    "line": 1,
+    "name": "duckduckgo.com",
+    "uri": "cypress\\e2e\\duckduckgo.feature"
+  }
+]

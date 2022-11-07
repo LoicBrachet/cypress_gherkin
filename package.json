@@ -15,12 +15,16 @@
   "license": "ISC",
   "devDependencies": {
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
-    "cypress": "^10.11.0",
-    "mochawesome": "^7.1.3",
-    "mochawesome-merge": "^4.2.1",
-    "mochawesome-report-generator": "^6.2.0"
+    "cypress": "^10.11.0"
   },
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^13.0.3"
-  }
+  },
+   "cypress-cucumber-preprocessor": {
+    "json": {
+      "enabled": true,
+      "formatter": "cucumber-json-formatter",
+      "output": "cucumber-report.json"
+    }
+}
 }

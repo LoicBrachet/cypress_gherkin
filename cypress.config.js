@@ -1,28 +1,33 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress')
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
-const addCucumberPreprocessorPlugin =
-require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
-const createEsbuildPlugin =
-require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
-module.exports = defineConfig({
-  reporter: 'mochawesome',
-  reporterOptions: {
-    jsonDir: "cypress/cucumber-json", 
-    overwrite: false,
-    html: false,
-    json: true
-  },
-  e2e: {
-  async setupNodeEvents(on, config) {
-  const bundler = createBundler({
-  plugins: [createEsbuildPlugin(config)],
-  });
-
-  on("file:preprocessor", bundler);
+const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild').createEsbuildPlugin;
+const addCucumberPreprocessorPlugin = require('@badeball/cypress-cucumber-preprocessor').addCucumberPreprocessorPlugin;
+ 
+async function setupNodeEvents(on, config) {
   await addCucumberPreprocessorPlugin(on, config);
-
+     
+  on(
+    "file:preprocessor",
+         createBundler({
+         plugins: [createEsbuildPlugin(config)],
+        })
+     
+  );
+ 
+  // Make sure to return the config object as it might have been modified by the plugin.
   return config;
-  },
-  specPattern: "cypress/e2e/*.feature",
-  },
-});
+}
+ 
+module.exports = defineConfig({
+  e2e: {
+    specPattern: "**/*.feature",
+    excludeSpecPattern: [
+      "*.js",
+      "*.md"
+    ],
+    chromeWebSecurity: false,
+    supportFile: false,
+    setupNodeEvents
+  }
+ 
+})
