@@ -1,6 +1,7 @@
 # cypress_gherkin
 
 Télécharger et installer node.js à partir du site https://nodejs.org 
+
 Vérifier l'installation en exécutant les commandes suivantes dans le Terminal exécutez :
     node -v puis npm -v
 
