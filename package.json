@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "report": "cypress run --record false",
+    "report:merge": "mochawesome-merge --reportDir cypress/results > mochawesome.json",
+    "report:generate": "marge mochawesome.json",
+    "postreport": "npm run report:merge && npm run report:generate"
   },
   "keywords": [],
   "author": "",

@@ -7,7 +7,7 @@ require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 module.exports = defineConfig({
   reporter: 'mochawesome',
   reporterOptions: {
-    reportDir: 'cypress/results',
+    jsonDir: "cypress/cucumber-json", 
     overwrite: false,
     html: false,
     json: true
