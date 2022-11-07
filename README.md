@@ -1,6 +1,7 @@
 # cypress_gherkin
 
 Télécharger et installer node.js à partir du site https://nodejs.org 
+
 Vérifier l'installation en exécutant les commandes suivantes dans le Terminal exécutez :
     node -v puis npm -v
 
@@ -44,37 +45,43 @@ Télécharger l'extension Cucumber
 Télécharger l'extension suivante:
     npm install -D @bahmutov/cypress-esbuild-preprocessor
 
+Télécharger le json-formatter correspondant à votre environnement (windows, linux ou autre) à l'adresse suivante:
+    https://github.com/cucumber/json-formatter/releases
+
+Placer le fichier chargé à la racine du projet et renommer le comme ceci:
+    cucumber-json-formatter.exe
+
 Configurer le fichier cypress.config.js comme ceci
    const { defineConfig } = require('cypress')
-const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
-const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild').createEsbuildPlugin;
-const addCucumberPreprocessorPlugin = require('@badeball/cypress-cucumber-preprocessor').addCucumberPreprocessorPlugin;
- 
-async function setupNodeEvents(on, config) {
-  await addCucumberPreprocessorPlugin(on, config);
-     
-  on(
-    "file:preprocessor",
-         createBundler({
-         plugins: [createEsbuildPlugin(config)],
-        })
-     
-  );
-}
- 
-module.exports = defineConfig({
-  e2e: {
-    specPattern: "**/*.feature",
-    excludeSpecPattern: [
-      "*.js",
-      "*.md"
-    ],
-    chromeWebSecurity: false,
-    supportFile: false,
-    setupNodeEvents
-  }
- 
-})
+    const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
+    const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild').createEsbuildPlugin;
+    const addCucumberPreprocessorPlugin = require('@badeball/cypress-cucumber-preprocessor').addCucumberPreprocessorPlugin;
+    
+    async function setupNodeEvents(on, config) {
+    await addCucumberPreprocessorPlugin(on, config);
+        
+    on(
+        "file:preprocessor",
+            createBundler({
+            plugins: [createEsbuildPlugin(config)],
+            })
+        
+    );
+    }
+    
+    module.exports = defineConfig({
+    e2e: {
+        specPattern: "**/*.feature",
+        excludeSpecPattern: [
+        "*.js",
+        "*.md"
+        ],
+        chromeWebSecurity: false,
+        supportFile: false,
+        setupNodeEvents
+    }
+    
+    })
 
 Ajouter les lignes suivantes dans la rubrique dependencies du package.json
      "cypress-cucumber-preprocessor": {
@@ -85,5 +92,13 @@ Ajouter les lignes suivantes dans la rubrique dependencies du package.json
     }
 }
 
-lancer les tests en tapant la commande suivante:
+2/Démarrer un projet depuis ce repo git:
+cloner le projet
+    git clone https://github.com/LoicBrachet/cypress_gherkin.git
+
+à la racine du projet taper la commande suivante pour installer l'ensemble du projet
+    npm i
+
+3/Exécution des tests
+lancer les tests et générer le rapport sous format json en tapant la commande suivante:
     npx cypress run --spec 'cypress/e2e/**/*.feature'
