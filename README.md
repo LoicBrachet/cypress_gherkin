@@ -45,11 +45,15 @@ Télécharger l'extension Cucumber
 Télécharger l'extension suivante:
     npm install -D @bahmutov/cypress-esbuild-preprocessor
 
-Télécharger le json-formatter correspondant à votre environnement (windows, linux ou autre) à l'adresse suivante:
+Le projet est configuré ici pour un environnement windows. Pour un environnement Linux, supprimer cucumber-json-formatter.exe
+
+Télécharger le json-formatter correspondant à votre environnement (linux ou autre) à l'adresse suivante:
     https://github.com/cucumber/json-formatter/releases
 
 Placer le fichier chargé à la racine du projet et renommer le comme ceci:
     cucumber-json-formatter.exe
+
+Pour Linux vous trouverez à la racine du projet le fichier cucumber-json-formatter-linux-amd64 que vous renommerez comme indiqué précédemment
 
 Configurer le fichier cypress.config.js comme ceci
    const { defineConfig } = require('cypress')
