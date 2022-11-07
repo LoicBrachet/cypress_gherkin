@@ -23,12 +23,20 @@ Ouvrir le Test Runner de Cypress en exécutant la commande suivante :
     
 ![image](https://user-images.githubusercontent.com/51779120/200290836-4beee100-892e-4b9c-9ef2-3c2f9d379d1f.png)
 
+Quand la boite dde dialogue s'ouvre cliquer sur "E2E Testing"
+
 ![image](https://user-images.githubusercontent.com/51779120/200291069-4be42b63-cda5-4c6c-bcb2-ac49e8d1d013.png)
+
+Cliquer sur "Continue"
 
 ![image](https://user-images.githubusercontent.com/51779120/200291145-d5d29fd4-b637-4ffd-b653-868edfa75813.png)
 
+Selectionner le navigateur de votre choix
+
 ![image](https://user-images.githubusercontent.com/51779120/200291193-2b5051f6-6623-4eb1-b4ba-72242113515a.png)
 
+Cliquer sur "Create a new empty spec"
+Votre projet Cypress est configuré
 
 Télécharger l'extension Cucumber
     npm install @badeball/cypress-cucumber-preprocessor
