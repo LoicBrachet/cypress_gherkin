@@ -122,4 +122,8 @@ cloner le projet
 lancer les tests et générer le rapport sous format json en tapant la commande suivante:
 
     npx cypress run --spec 'cypress/e2e/**/*.feature'
+    
+lancer simplement les tests
+
+    npm run cy:open
 
