@@ -20,7 +20,15 @@ Modifier le fichier package.json pour ajouter une nouvelle commande qui facilite
 
 Ouvrir le Test Runner de Cypress en exécutant la commande suivante :
     npm run cy:open
+    
 ![image](https://user-images.githubusercontent.com/51779120/200290836-4beee100-892e-4b9c-9ef2-3c2f9d379d1f.png)
+
+![image](https://user-images.githubusercontent.com/51779120/200291069-4be42b63-cda5-4c6c-bcb2-ac49e8d1d013.png)
+
+![image](https://user-images.githubusercontent.com/51779120/200291145-d5d29fd4-b637-4ffd-b653-868edfa75813.png)
+
+![image](https://user-images.githubusercontent.com/51779120/200291193-2b5051f6-6623-4eb1-b4ba-72242113515a.png)
+
 
 Télécharger l'extension Cucumber
     npm install @badeball/cypress-cucumber-preprocessor
